@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mridul Kumar - AI/ML Developer</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            document.documentElement.dataset.theme = savedTheme === 'dark' ? 'dark' : 'light';
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">Mridul Kumar</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+            Dark Mode
+        </button>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-wrapper">
+            <div class="hero-text">
+                <div class="hero-badge">Open to Opportunities</div>
+                <div class="hello-world">
+                    <span class="code-tag">Hello_World</span><span class="slash">/</span>
+                </div>
+                <h1 class="hero-title">Building Intelligent Systems</h1>
+                <h2 class="hero-subtitle">Python Developer · AI/ML Enthusiast · Backend Builder</h2>
+                <p class="hero-desc">I build production-minded AI systems, data workflows, and full-stack tools using Python, Flask, ML models, and modern web technologies.</p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">9+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Tech Stack</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Years Learning</div>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="Mridul_Resume.pdf" target="_blank" class="btn btn-secondary">Download Resume</a>
+                </div>
+            </div>
+
+            <div class="hero-image-section">
+                <div class="orbit-scene">
+                    <div class="rotating-icons-container" id="rotatingIcons"></div>
+                    <div class="sphere-core">
+                        <img src="Mridul.JPG" alt="Mridul Kumar" class="profile-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container section-light about-section">
+        <div class="section-kicker">Who I Am</div>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-layout">
+            <div class="about-image-wrap">
+                <img src="Mridul.JPG" alt="Mridul Kumar" class="about-image">
+            </div>
+            <div class="about-content">
+                <h3>Bridging Engineering with Intelligent Systems</h3>
+                <p>
+                    I’m a B.Tech CSE student focused on Python-powered AI/ML, backend systems, and data workflows. My work spans fraud detection, voice assistants, forecasting tools, and full-stack applications built for practical use.
+                </p>
+                <p>
+                    I like clean code, clear architecture, and systems that do real work. From training models to shipping interfaces, I enjoy building products that feel fast, useful, and intentional.
+                </p>
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <span>9+</span>
+                        <p>Projects</p>
+                    </div>
+                    <div class="about-stat">
+                        <span>15+</span>
+                        <p>Tech Skills</p>
+                    </div>
+                    <div class="about-stat">
+                        <span>3+</span>
+                        <p>Years Learning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container section-dark">
+        <div class="section-kicker">What I Know</div>
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-layout">
+            <div class="skill-card">
+                <h3>Core Programming</h3>
+                <div class="skill-bars">
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>Python & AI Frameworks</span><span>90%</span></div>
+                        <div class="skill-bar"><span style="width: 90%"></span></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>Machine Learning / Deep Learning</span><span>82%</span></div>
+                        <div class="skill-bar"><span style="width: 82%"></span></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>Web (React, Flask, HTML/CSS)</span><span>80%</span></div>
+                        <div class="skill-bar"><span style="width: 80%"></span></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>Database (SQL / MongoDB)</span><span>78%</span></div>
+                        <div class="skill-bar"><span style="width: 78%"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <h3>ML / Data Stack</h3>
+                <div class="skill-bars">
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>Data Annotation & Curation</span><span>90%</span></div>
+                        <div class="skill-bar"><span style="width: 90%"></span></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>Pandas, NumPy, Scikit-learn</span><span>85%</span></div>
+                        <div class="skill-bar"><span style="width: 85%"></span></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>TensorFlow / OpenCV / NLTK</span><span>78%</span></div>
+                        <div class="skill-bar"><span style="width: 78%"></span></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-label-row"><span>IoT & Arduino</span><span>70%</span></div>
+                        <div class="skill-bar"><span style="width: 70%"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-tags-wrap">
+            <span>Python</span><span>C++</span><span>JavaScript</span><span>React.js</span><span>Flask</span><span>TensorFlow</span><span>OpenCV</span><span>Scikit-learn</span><span>Pandas</span><span>NumPy</span><span>Matplotlib</span><span>Seaborn</span><span>NLTK</span><span>Firebase</span><span>MySQL</span><span>Git & GitHub</span><span>HuggingFace</span><span>VS Code</span><span>Arduino</span><span>LLM APIs</span>
+        </div>
+    </section>
+
+    <section id="services" class="container section-light">
+        <div class="section-kicker">What I Do</div>
+        <h2 class="section-title">My Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">AI</div>
+                <h3>ML / DL Engineering</h3>
+                <p>Training CNNs, implementing NLP pipelines, feature engineering, and building model evaluation workflows end-to-end.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">DS</div>
+                <h3>Data Curation & Annotation</h3>
+                <p>Cleaning multi-source datasets, preprocessing image pipelines, and building high-accuracy training sets for ML/DL models.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">APP</div>
+                <h3>AI-Powered Applications</h3>
+                <p>Building LLM-powered chat assistants, voice-controlled desktop apps, and smart forecasting systems with API integrations.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">WEB</div>
+                <h3>Full-Stack Development</h3>
+                <p>Scalable backends with Flask, reactive UIs with React.js, Firebase auth/Firestore, and relational database design.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-kicker">What I've Built</div>
+            <h2 class="section-title">Featured Projects</h2>
+
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ml-ai">ML/AI</button>
+                <button class="filter-btn" data-filter="web-dev">Web Dev</button>
+                <button class="filter-btn" data-filter="computer-vision">Computer Vision</button>
+                <button class="filter-btn" data-filter="data-science">Data Science</button>
+            </div>
+
+            <div id="projectsContainer" class="projects-grid"></div>
+        </div>
+    </section>
+
+    <section id="resume" class="container section-dark resume-section">
+        <div class="section-kicker">My Journey</div>
+        <h2 class="section-title">Experience & Education</h2>
+        <div class="resume-grid">
+            <div class="resume-card">
+                <h3>Experience</h3>
+                <div class="resume-item">
+                    <span class="resume-date">Feb 2025 - Present</span>
+                    <h4>AI/ML Intern, NIELIT Ropar</h4>
+                    <p>Developing and deploying machine learning models, data preprocessing pipelines, and evaluation workflows.</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date">2026 - Present</span>
+                    <h4>Campus Leader, Hack Byte-Codex</h4>
+                    <p>Leading a student-driven tech community and organizing workshops on emerging technologies.</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date">Oct 2025 - Present</span>
+                    <h4>Google Student Ambassador</h4>
+                    <p>Driving engagement campaigns and technical workshops around Gemini and Generative AI across campus.</p>
+                </div>
+            </div>
+            <div class="resume-card">
+                <h3>Education</h3>
+                <div class="resume-item">
+                    <span class="resume-date">2024 - 2026</span>
+                    <h4>B.Tech CSE, Government College Dharamshala</h4>
+                    <p>Specialization in AI/ML, with focus on neural networks, database systems, and web development.</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date">2022</span>
+                    <h4>12th Class, GSSS Daroh</h4>
+                    <p>Completed senior secondary education with a PCMB stream focus.</p>
+                </div>
+                <div class="resume-item">
+                    <span class="resume-date">2020</span>
+                    <h4>10th Class, GSSS Daroh</h4>
+                    <p>Built a strong foundation in mathematics, science, and computing fundamentals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container contact-inner">
+            <div>
+                <div class="section-kicker light">Let's Connect</div>
+                <h2 class="section-title">Let's build something great together!</h2>
+                <p class="contact-subtitle">Open for internships, collaborative ML projects, data engineering challenges, and full-stack development.</p>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:mridulku225@gmail.com" class="btn btn-primary">Email Me</a>
+                <a href="https://www.linkedin.com/in/mridulck001" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                <a href="https://github.com/mridulck001" target="_blank" class="btn btn-secondary">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Mridul Kumar. Built with passion and code ✨</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
