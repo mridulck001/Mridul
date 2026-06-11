@@ -243,7 +243,32 @@ const projects = [
         ],
         link: "https://github.com/mridulck001/Indian_House_Price_Prediction_Machine-Learning",
         linkText: "View Code"
-    }
+    },
+    {{
+    id: 3,
+    title: "Automatic Face Grouping",
+    subtitle: "AI-Powered Face Clustering & Organization",
+    category: "ml-ai",
+    tech: [
+        "Python",
+        "Flask",
+        "OpenCV",
+        "dlib",
+        "face_recognition",
+        "Scikit-learn",
+        "DBSCAN"
+    ],
+    description: "Flask-based web application that automatically detects, clusters, and organizes faces from photos and videos using unsupervised machine learning. No training data or manual labeling required.",
+    features: [
+        "Automatic face detection from images & videos",
+        "DBSCAN-based unsupervised face clustering",
+        "No training or manual labeling required",
+        "Group photo and multi-person image handling",
+        "Video frame extraction and face organization"
+    ],
+    link: "https://github.com/nielitropar/unsupervised-face-clustering",
+    linkText: "View Code"
+}
 ];
 
 // ============================================
