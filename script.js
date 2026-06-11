@@ -248,7 +248,7 @@ const projects = [
     id: 10,
     title: "Automatic Face Grouping",
     subtitle: "AI-Powered Face Clustering & Organization",
-    category: "ml-ai",
+    category: "computer-vision",
     tech: [
         "Python",
         "Flask",
