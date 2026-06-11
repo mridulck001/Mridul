@@ -7,15 +7,27 @@ function initOrbitingIcons() {
     if (!container) return;
 
     const iconPairs = [
-        { path: 'assets/python.png', label: 'Python' },
-        { path: 'assets/javascript.png', label: 'JavaScript' },
-        { path: 'assets/flask.png', label: 'Flask' },
-        { path: 'assets/html.png', label: 'HTML5' },
-        { path: 'assets/css.png', label: 'CSS3' },
-        { path: 'assets/dart.png', label: 'Dart' },
-        { path: 'assets/flutter.png', label: 'Flutter' },
-        { path: 'assets/illustrator.png', label: 'Illustrator' }
+        { path: 'assets/python.png',      label: 'Python'      },
+        { path: 'assets/javascript.png',  label: 'JavaScript'  },
+        { path: 'assets/flask.png',        label: 'Flask'       },
+        { path: 'assets/html.png',         label: 'HTML5'       },
+        { path: 'assets/css.png',          label: 'CSS3'        },
+        { path: 'assets/dart.png',         label: 'Dart'        },
+        { path: 'assets/flutter.png',      label: 'Flutter'     },
+        { path: 'assets/illustrator.png',  label: 'Illustrator' }
     ];
+
+    // Devicons path map for fallback (only icons that exist in devicons)
+    const devIconsMap = {
+        'python':      'python/python-original.svg',
+        'javascript':  'javascript/javascript-original.svg',
+        'flask':       'flask/flask-original.svg',
+        'html5':       'html5/html5-original.svg',
+        'css3':        'css3/css3-original.svg',
+        'dart':        'dart/dart-original.svg',
+        'flutter':     'flutter/flutter-original.svg'
+        // 'illustrator' intentionally omitted — not in devicons
+    };
 
     const orbitItems = [];
 
@@ -24,46 +36,64 @@ function initOrbitingIcons() {
         iconEl.className = 'orbiting-icon';
 
         const img = document.createElement('img');
-        img.src = icon.path;
-        img.alt = icon.label;
+        img.src   = icon.path;
+        img.alt   = icon.label;
         img.title = icon.label;
-        
-        // Added fallback for icons that might be missing locally
-        img.onerror = function() { 
-            this.src = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.label.toLowerCase()}/${icon.label.toLowerCase()}-original.svg`; 
+
+        // FIX: Guard onerror with null-clear to prevent infinite retry loop.
+        // Original code set this.src to another possibly-broken URL with no guard.
+        img.onerror = function () {
+            this.onerror = null; // prevent infinite loop
+            const key = icon.label.toLowerCase();
+            const devPath = devIconsMap[key];
+            if (devPath) {
+                this.src = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${devPath}`;
+            } else {
+                // SVG letter-avatar so slot is never blank
+                const letter = icon.label.charAt(0).toUpperCase();
+                this.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><circle cx='17' cy='17' r='17' fill='%232563eb'/><text x='17' y='22' text-anchor='middle' font-size='15' font-family='sans-serif' fill='white'>${letter}</text></svg>`;
+            }
         };
 
         iconEl.appendChild(img);
-
         container.appendChild(iconEl);
 
         orbitItems.push({
-            element: iconEl,
+            element:   iconEl,
             baseAngle: (Math.PI * 2 * index) / iconPairs.length
         });
     });
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const xRadius = 180;
     const yRadius = 180;
-    const zRadius = 0;
+
+    // FIX: zRadius was 0, making depth = (0+0)/(2*0) = 0/0 = NaN.
+    // NaN spread to scale, opacity, zIndex → every icon turned invisible.
+    // Setting zRadius = xRadius gives depth a clean 0→1 range.
+    const zRadius = xRadius;
 
     const renderOrbit = (elapsedSeconds) => {
         const spin = elapsedSeconds * 0.8;
 
         orbitItems.forEach((item) => {
-            const angle = item.baseAngle + spin;
-            const x = Math.cos(angle) * xRadius;
-            const y = Math.sin(angle) * yRadius;
-            const z = Math.sin(angle) * zRadius;
-            const depth = (z + zRadius) / (2 * zRadius);
-            const scale = 0.72 + depth * 0.4;
+            const angle   = item.baseAngle + spin;
+            const x       = Math.cos(angle) * xRadius;
+            const y       = Math.sin(angle) * yRadius;
+            const z       = Math.sin(angle) * zRadius;
+
+            // depth is now safely in [0, 1]
+            const depth   = (z + zRadius) / (2 * zRadius);
+            const scale   = 0.72 + depth * 0.4;
             const opacity = 0.35 + depth * 0.65;
 
-           item.element.style.transform =`translate(${x}px, ${y}px) scale(${scale})`;
-            item.element.style.opacity = opacity.toFixed(2);
-            item.element.style.zIndex = String(Math.round(depth * 1000));
-            item.element.style.filter = `brightness(${0.82 + depth * 0.22}) saturate(${0.9 + depth * 0.15})`;
+            // CSS already centres each icon via margin:-27px/-27px,
+            // so plain translate(x, y) moves it correctly from that centre point.
+            item.element.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+            item.element.style.opacity   = opacity.toFixed(2);
+            item.element.style.zIndex    = String(Math.round(depth * 1000));
+            item.element.style.filter    = `brightness(${(0.82 + depth * 0.22).toFixed(3)}) saturate(${(0.9 + depth * 0.15).toFixed(3)})`;
         });
     };
 
@@ -245,30 +275,22 @@ const projects = [
         linkText: "View Code"
     },
     {
-    id: 10,
-    title: "Automatic Face Grouping",
-    subtitle: "AI-Powered Face Clustering & Organization",
-    category: "computer-vision",
-    tech: [
-        "Python",
-        "Flask",
-        "OpenCV",
-        "dlib",
-        "face_recognition",
-        "Scikit-learn",
-        "DBSCAN"
-    ],
-    description: "Flask-based web application that automatically detects, clusters, and organizes faces from photos and videos using unsupervised machine learning. No training data or manual labeling required.",
-    features: [
-        "Automatic face detection from images & videos",
-        "DBSCAN-based unsupervised face clustering",
-        "No training or manual labeling required",
-        "Group photo and multi-person image handling",
-        "Video frame extraction and face organization"
-    ],
-    link: "https://github.com/nielitropar/unsupervised-face-clustering",
-    linkText: "View Code"
-}
+        id: 10,
+        title: "Automatic Face Grouping",
+        subtitle: "AI-Powered Face Clustering & Organization",
+        category: "computer-vision",
+        tech: ["Python", "Flask", "OpenCV", "dlib", "face_recognition", "Scikit-learn", "DBSCAN"],
+        description: "Flask-based web application that automatically detects, clusters, and organizes faces from photos and videos using unsupervised machine learning. No training data or manual labeling required.",
+        features: [
+            "Automatic face detection from images & videos",
+            "DBSCAN-based unsupervised face clustering",
+            "No training or manual labeling required",
+            "Group photo and multi-person image handling",
+            "Video frame extraction and face organization"
+        ],
+        link: "https://github.com/nielitropar/unsupervised-face-clustering",
+        linkText: "View Code"
+    }
 ];
 
 // ============================================
@@ -280,7 +302,6 @@ function renderProjects(filterCategory = 'all') {
     container.innerHTML = '';
 
     projects.forEach((project, index) => {
-        // Filter projects
         if (filterCategory !== 'all' && project.category !== filterCategory) {
             return;
         }
@@ -314,22 +335,15 @@ function renderProjects(filterCategory = 'all') {
 
         container.appendChild(card);
 
-        // Animate cards on render
         gsap.registerPlugin(ScrollTrigger);
         gsap.fromTo(card,
-            {
-                opacity: 0,
-                y: 50
-            },
+            { opacity: 0, y: 50 },
             {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
                 delay: index * 0.1,
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%',
-                }
+                scrollTrigger: { trigger: card, start: 'top 80%' }
             }
         );
     });
@@ -344,16 +358,9 @@ function setupProjectFilters() {
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
             btn.classList.add('active');
-
-            // Get filter category
-            const filter = btn.getAttribute('data-filter');
-
-            // Render filtered projects
-            renderProjects(filter);
+            renderProjects(btn.getAttribute('data-filter'));
         });
     });
 }
@@ -409,10 +416,7 @@ function setupSmoothScroll() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
@@ -423,25 +427,13 @@ function setupSmoothScroll() {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize orbiting icons
     initOrbitingIcons();
-
-    // Render all projects initially
     renderProjects('all');
-
-    // Setup project filters
     setupProjectFilters();
-
-    // Setup theme toggle
     setupThemeToggle();
-
-    // Setup navbar effects
     setupNavbar();
-
-    // Setup smooth scrolling
     setupSmoothScroll();
 
-    // Navbar entrance animation
     gsap.from('nav', {
         y: -100,
         opacity: 0,
