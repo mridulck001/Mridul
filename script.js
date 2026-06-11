@@ -245,7 +245,7 @@ const projects = [
         linkText: "View Code"
     },
     {{
-    id: 3,
+    id: 10,
     title: "Automatic Face Grouping",
     subtitle: "AI-Powered Face Clustering & Organization",
     category: "ml-ai",
