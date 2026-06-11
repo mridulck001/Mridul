@@ -44,9 +44,9 @@ function initOrbitingIcons() {
     });
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const xRadius = 168;
-    const yRadius = 56;
-    const zRadius = 115;
+    const xRadius = 180;
+    const yRadius = 180;
+    const zRadius = 0;
 
     const renderOrbit = (elapsedSeconds) => {
         const spin = elapsedSeconds * 0.8;
@@ -60,7 +60,7 @@ function initOrbitingIcons() {
             const scale = 0.72 + depth * 0.4;
             const opacity = 0.35 + depth * 0.65;
 
-            item.element.style.transform = `translate3d(${x}px, ${y}px, ${z}px) scale(${scale})`;
+           item.element.style.transform =`translate(${x}px, ${y}px) scale(${scale})`;
             item.element.style.opacity = opacity.toFixed(2);
             item.element.style.zIndex = String(Math.round(depth * 1000));
             item.element.style.filter = `brightness(${0.82 + depth * 0.22}) saturate(${0.9 + depth * 0.15})`;
